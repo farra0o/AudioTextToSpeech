@@ -93,6 +93,31 @@ namespace AudioTextToSpeech
 
         private void button4_Click(object sender, EventArgs e)
         {
+            LLamaUsuario();
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            usuarios.Clear();
+            listBox1.Items.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            usuarios.RemoveAt(0);
+            listBox1.Items.RemoveAt(0);
+            LLamaUsuario();
+        }
+
+
+        public void LLamaUsuario()
+        {
             string nombre = usuarios[0].Nombre;
             label4.Text = nombre;
 
@@ -101,18 +126,18 @@ namespace AudioTextToSpeech
 
             label6.Text = ventana.ToString();
 
-            
+
 
             if (System.IO.File.Exists(AtendiendoSonido))
             {
                 // Crear un reproductor de audio
                 var readerNombre = new Mp3FileReader(AtendiendoSonido);
                 var outputDevice = new WaveOutEvent();
-                
-                    outputDevice.Volume = 1;
-                    outputDevice.Init(readerNombre);
-                    outputDevice.Play();
-               
+
+                outputDevice.Volume = 1;
+                outputDevice.Init(readerNombre);
+                outputDevice.Play();
+
                 while (outputDevice.PlaybackState == PlaybackState.Playing)
                 {
                     System.Threading.Thread.Sleep(100);
@@ -132,7 +157,7 @@ namespace AudioTextToSpeech
                 while (outputDevice2.PlaybackState == PlaybackState.Playing)
                 {
                     System.Threading.Thread.Sleep(100);
-                }  
+                }
 
                 synthesizer.Speak(ventana.ToString());
             }
@@ -141,12 +166,6 @@ namespace AudioTextToSpeech
             {
                 MessageBox.Show("El archivo MP3 no se encontró en la ruta especificada.");
             }
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
