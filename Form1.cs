@@ -5,6 +5,8 @@ using System.Speech.Synthesis;
 using System.Windows.Forms;
 using NAudio.Wave;
 using NAudio.Utils;
+using System.IO;
+using System.Diagnostics;
 
 namespace AudioTextToSpeech
 {
@@ -14,8 +16,11 @@ namespace AudioTextToSpeech
 
         private SpeechSynthesizer synthesizer = new SpeechSynthesizer();
 
-        string AtendiendoSonido = "E:\\Documentos\\Net.code\\Proyecto\\AudioTextToSpeech\\SonidosMP3\\Usuario.mp3";
-        string Sala = "E:\\Documentos\\Net.code\\Proyecto\\AudioTextToSpeech\\SonidosMP3\\Ventana.mp3";
+
+        string AtendiendoSonido = Environment.CurrentDirectory + "\\SonidosMP3\\Usuario.mp3";
+        
+
+        string Sala = Environment.CurrentDirectory + "\\SonidosMP3\\Ventana.mp3";
         public Form1()
         {
             InitializeComponent();
@@ -125,7 +130,7 @@ namespace AudioTextToSpeech
             int ventana = rnd.Next(1, 6);
 
             label6.Text = ventana.ToString();
-
+            Console.WriteLine(AtendiendoSonido);
 
 
             if (System.IO.File.Exists(AtendiendoSonido))
